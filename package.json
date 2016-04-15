@@ -1,0 +1,23 @@
+{
+  "name": "button",
+  "version": "1.0.0",
+  "description": "A web app for listening to buttons",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pusher-community/button.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pusher-community/button/issues"
+  },
+  "homepage": "https://github.com/pusher-community/button#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
