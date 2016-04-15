@@ -20,7 +20,7 @@
       </div>
 
 
-      <pre class="bg-light-gray pa3"><code>const pusher = new Pusher('some-key-hardcoded-key-here', {cluster:'eu'})
+      <pre class="bg-light-gray pa3"><code>const pusher = new Pusher('{{pusherKey}}', {cluster:'{{pusherCluster}}'})
 const channel = pusher.subscribe('button')
 
 channel.on('press', () => {

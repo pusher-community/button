@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>button</title>
+    <link rel="stylesheet" href="/build.css" media="screen">
+  </head>
+  <body>
+
+    <main class="ph5 mw7 mb7">
+
+
+      <form method="post" class="pa2" id="form">
+        <button class="f-subheadline bg-black pa2 white bn">Button #{{buttonID}}</button>
+      </form>
+
+
+      <pre class="bg-light-gray pa3"><code>const pusher = new Pusher('{{pusherKey}}', {cluster:'{{pusherCluster}}'})
+const channel = pusher.subscribe('<strong>button-{{buttonID}}</strong>')
+
+channel.on('press', () => {
+
+})</code></pre>
+
+    </main>
+
+    <script type="text/javascript">
+
+
+
+
+      var form = document.querySelector('form')
+
+      form.onsubmit = function(e){
+        e.preventDefault()
+
+        var request = new XMLHttpRequest();
+        request.open('POST', document.location.href, true);
+        // request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+        request.send();
+
+      }
+    </script>
+
+  </body>
+</html>
