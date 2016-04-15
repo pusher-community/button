@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>button</title>
+    <link rel="stylesheet" href="build.css" media="screen">
+  </head>
+  <body>
+
+    <main class="ph5 mw7 mb7">
+
+      <h1 class="f-headline">Button</h1>
+
+      <hr />
+
+      <h2 class="f2">We've put a button online, and want to see what you can make it do.</h2>
+
+      <div style="text-align:center">
+        <img src="wireframe.svg" style="zoom:2"/>
+      </div>
+
+
+      <pre class="bg-light-gray pa3"><code>const pusher = new Pusher('some-key-hardcoded-key-here', {cluster:'eu'})
+const channel = pusher.subscribe('button')
+
+channel.on('press', () => {
+
+})</code></pre>
+
+      <p class="mv4">
+        <a href="#" class="link bg-black pa2 white bn">Open in JSBin</a>
+      </p>
+
+      <p class="f4">Come and show something that uses our button to do something cool and we'll throw you a high-five and maybe some mega-cool swag.</p>
+
+      <hr />
+
+      <h2>Looking for a test button?</h2>
+
+      <form method="post">
+        <button class="link bg-black pa2 white bn">Create a virtual button</button>
+      </form>
+
+
+
+    </main>
+
+  </body>
+</html>
