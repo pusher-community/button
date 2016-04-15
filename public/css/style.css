@@ -1,0 +1,18 @@
+@import 'tachyons';
+
+hr {
+  border:none;
+  height:0;
+  border-bottom: 1px solid #555;
+}
+
+
+pre, code {
+  overflow-x: scroll;
+}
+
+
+code strong {
+  background: #BAE66C;
+  font-weight:100;
+}
