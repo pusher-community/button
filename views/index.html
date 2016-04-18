@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="build.css" media="screen">
   </head>
   <body class="ph5 mw8 mb6">
-    
+
     <h1 class="f-subheadline">Pusher Push&nbsp;Button</h1>
 
     <main class="mw7">
@@ -20,10 +20,10 @@
 
 
       <pre class="bg-light-gray pa3"><code>const pusher = new Pusher('{{pusherKey}}', {cluster:'{{pusherCluster}}'})
-const channel = pusher.subscribe('button')
+const channel = pusher.subscribe('<span contenteditable>button</span>')
 
-channel.on('press', () => {
-
+channel.bind('press', () => {
+  changeColour()
 })</code></pre>
 
       <p class="mv4">
@@ -34,13 +34,23 @@ channel.on('press', () => {
 
       <hr />
 
-      <h2>Looking for a test button?</h2>
+      <h2>Want a button to test with?</h2>
 
       <form method="post">
         <button class="link bg-black pa2 white bn">Create a virtual button</button>
       </form>
 
-
+      <script src="https://js.pusher.com/3.0/pusher.min.js"></script>
+      <script type="text/javascript">
+new Pusher('{{pusherKey}}', {cluster:'{{pusherCluster}}'})
+  .subscribe('button-16')
+    .bind('press', (data) => {
+      document.body.style.backgroundColor = '#' + Math.random().toString(16).substr(2,6)
+    })
+    .bind('release', (data) => {
+      document.body.style.backgroundColor = '#eee'
+    })
+      </script>
 
     </main>
 
