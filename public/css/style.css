@@ -16,3 +16,7 @@ code strong {
   background: #BAE66C;
   font-weight:100;
 }
+
+body {
+  transition: background .2s
+}
