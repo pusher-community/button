@@ -25,7 +25,7 @@ app.engine('html', exphbs())
 app.set('view engine', 'html')
 app.set('views', __dirname + '/views')
 
-app.locals.pusherKey = process.env.PUSHER_KEY
+app.locals.pusherKey = process.env.PUSHER_APP_KEY
 app.locals.pusherCluster = process.env.PUSHER_CLUSTER
 
 app.get('/', (req, res) => res.render('index'))
