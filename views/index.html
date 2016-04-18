@@ -43,7 +43,7 @@ channel.bind('press', () => {
       <script src="https://js.pusher.com/3.0/pusher.min.js"></script>
       <script type="text/javascript">
 new Pusher('{{pusherKey}}', {cluster:'{{pusherCluster}}'})
-  .subscribe('button-16')
+  .subscribe('button')
     .bind('press', (data) => {
       document.body.style.backgroundColor = '#' + Math.random().toString(16).substr(2,6)
     })
