@@ -26,20 +26,27 @@ channel.on('press', () => {
 
     <script type="text/javascript">
 
-
-
-
       var form = document.querySelector('form')
 
       form.onsubmit = function(e){
         e.preventDefault()
-
-        var request = new XMLHttpRequest();
-        request.open('POST', document.location.href, true);
-        // request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-        request.send();
-
       }
+
+      function post(extra, event){
+        event.preventDefault()
+        var request = new XMLHttpRequest()
+        request.open('POST', document.location.href + (extra||''), true)
+        request.send()
+      }
+
+      var press   = post.bind(null, '/press')
+      var release = post.bind(null, '/release')
+
+      var button = document.querySelector('form')
+
+      button.addEventListener('mousedown', press, false)
+      button.addEventListener('mouseup', release, false)
+
     </script>
 
   </body>

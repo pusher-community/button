@@ -53,9 +53,16 @@ app.get('/b/:id', hasKey, hasButton, (req, res, next) => {
 })
 
 // press the button
-app.post('/b/:id', hasKey, hasButton, (req, res) => {
+app.post('/b/:id/press', hasKey, hasButton, (req, res) => {
   if(req.button)
     pusher.trigger(`button-${req.button}`, 'press', {id: req.button})
+
+  res.send('done')
+})
+
+app.post('/b/:id/release', hasKey, hasButton, (req, res) => {
+  if(req.button)
+    pusher.trigger(`button-${req.button}`, 'release', {id: req.button})
 
   res.send('done')
 })
