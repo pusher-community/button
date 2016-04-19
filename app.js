@@ -27,6 +27,7 @@ app.set('views', __dirname + '/views')
 
 app.locals.pusherKey = process.env.PUSHER_APP_KEY
 app.locals.pusherCluster = process.env.PUSHER_CLUSTER
+app.locals.jsbinLink = process.env.JSBIN_LINK
 
 app.get('/', (req, res) => res.render('index'))
 

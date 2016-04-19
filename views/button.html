@@ -4,48 +4,54 @@
     <meta charset="utf-8">
     <title>button</title>
     <link rel="stylesheet" href="/build.css" media="screen">
+
+    <style media="screen">
+      button {
+        text-align: center;
+        display: block;
+        background: #fff;
+        border:none;
+        margin:auto;
+      }
+    </style>
   </head>
   <body>
 
     <main class="ph5 mw7 mb7">
 
+      <h1 class="f-subheadline">button-{{buttonID}}</h1>
 
-      <form method="post" class="pa2" id="form">
-        <button class="f-subheadline bg-black pa2 white bn">Button #{{buttonID}}</button>
-      </form>
+      <button>
+        <img src="/off.svg" id="img" />
+      </button>
 
 
-      <pre class="bg-light-gray pa3"><code>const pusher = new Pusher('{{pusherKey}}', {cluster:'{{pusherCluster}}'})
-const channel = pusher.subscribe('<strong>button-{{buttonID}}</strong>')
-
-channel.on('press', () => {
-
-})</code></pre>
+      <pre class="bg-light-gray pa3"><code><strong class="rm">-</strong> const channel = pusher.subscribe('<strong class="rm">button</strong>')
+<strong>+</strong> const channel = pusher.subscribe('<strong>button-{{buttonID}}</strong>')</code></pre>
 
     </main>
 
     <script type="text/javascript">
 
-      var form = document.querySelector('form')
-
-      form.onsubmit = function(e){
-        e.preventDefault()
-      }
-
       function post(extra, event){
         event.preventDefault()
         var request = new XMLHttpRequest()
-        request.open('POST', document.location.href + (extra||''), true)
+        request.open('POST', document.location.pathname + (extra||''), true)
         request.send()
+
+        // tmp
+        img.src = extra == '/press' ? '/on.svg' : '/off.svg'
       }
 
       var press   = post.bind(null, '/press')
       var release = post.bind(null, '/release')
 
-      var button = document.querySelector('form')
+      var button = document.querySelector('button')
 
       button.addEventListener('mousedown', press, false)
       button.addEventListener('mouseup', release, false)
+      button.addEventListener('touchstart', press, false)
+      button.addEventListener('touchend', release, false)
 
     </script>
 

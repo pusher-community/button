@@ -7,52 +7,84 @@
   </head>
   <body class="ph5 mw8 mb6">
 
-    <h1 class="f-subheadline">Pusher Push&nbsp;Button</h1>
+    <h3>
+      <a href="http://button.pusher.io">button.pusher.io</a>
+    </h3>
+
+    <hr />
+
+    <h1 class="f-subheadline">Pusher Push Button</h1>
+
+    <hr />
 
     <main class="mw7">
-      <hr />
 
       <h2 class="f2">We've put a button online, and want to see what you can make it do.</h2>
 
       <div style="text-align:center">
-        <img src="wireframe.svg" style="zoom:2"/>
+        <img src="off.svg" style="zoom:2"/>
       </div>
 
+      <p class="f4">Show us something neat and we'll throw you a high-five<a href="#high-five-terms">*</a>.</p>
 
-      <pre class="bg-light-gray pa3"><code>const pusher = new Pusher('{{pusherKey}}', {cluster:'{{pusherCluster}}'})
-const channel = pusher.subscribe('<span contenteditable>button</span>')
+      <h2>Connect to the button</h2>
 
-channel.bind('press', () => {
-  changeColour()
-})</code></pre>
+      <pre class="bg-light-gray pa3"><code>&lt;script src="https://js.pusher.com/3.0/pusher.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+var pusher = new Pusher('{{pusherKey}}', {cluster:'{{pusherCluster}}'})
+var button = pusher.subscribe('button')
 
+button.bind('press', function(data) {
+  doSomethingNeat()
+})
+&lt;/script&gt;</code></pre>
+
+      {{#jsbinLink}}
       <p class="mv4">
-        <a href="#" class="link bg-black pa2 white bn">Open in JSBin</a>
+        <a href="{{jsbinLink}}" target="_blank" class="link bg-black pa2 white bn">Open in JSBin</a>
       </p>
+      {{/jsbinLink}}
 
-      <p class="f4">Come and show something that uses our button to do something cool and we'll throw you a high-five and maybe some mega-cool swag.</p>
+      <h2>Make a virtual button</h2>
 
-      <hr />
-
-      <h2>Want a button to test with?</h2>
+      <p>You're welcome to come and use our button, but if you want to test your creation with your own button, you can create a virtual one below:</p>
 
       <form method="post">
         <button class="link bg-black pa2 white bn">Create a virtual button</button>
       </form>
 
-      <script src="https://js.pusher.com/3.0/pusher.min.js"></script>
-      <script type="text/javascript">
-new Pusher('{{pusherKey}}', {cluster:'{{pusherCluster}}'})
-  .subscribe('button')
-    .bind('press', (data) => {
-      document.body.style.backgroundColor = '#' + Math.random().toString(16).substr(2,6)
-    })
-    .bind('release', (data) => {
-      document.body.style.backgroundColor = '#eee'
-    })
-      </script>
-
+      <div id="high-five-terms">
+        <p>
+          <em>
+            <strong>*</strong>High-fives may contain swag.
+          </em>
+        </p>
+      </div>
     </main>
 
+
+    <script src="https://js.pusher.com/3.0/pusher.min.js"></script>
+    <script type="text/javascript">
+
+      var h1 = document.querySelector('h1')
+      var img = document.querySelector('img')
+
+      function press(){
+        img.src = 'on.svg'
+        h1.style.webkitFilter = h1.style.filter = 'blur(2px)'
+      }
+
+      function release(id){
+        img.src = 'off.svg'
+        h1.style.webkitFilter = h1.style.filter = ''
+      }
+
+
+      new Pusher('{{pusherKey}}', {cluster:'{{pusherCluster}}'})
+        .subscribe('button')
+          .bind('press', press)
+          .bind('release', release)
+
+    </script>
   </body>
 </html>
