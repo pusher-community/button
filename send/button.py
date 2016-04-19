@@ -5,7 +5,7 @@ dotenv_path = join(dirname(__file__), '..', '.env')
 load_dotenv(dotenv_path)
 
 import pygame
-from time import sleep
+from time import sleep, time
 
 import pusher
 
@@ -34,9 +34,9 @@ class Button:
 
             if state:
                 self.count = self.count + 1
-                pusher_client.trigger(self.name, 'press', {'ref': self.count})
+                pusher_client.trigger(self.name, 'press', {'id': self.count, 'time': time()})
             else:
-                pusher_client.trigger(self.name, 'release', {'ref': self.count})
+                pusher_client.trigger(self.name, 'release', {'id': self.count, 'time': time()})
 
             self.last = state
 
