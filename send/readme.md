@@ -17,6 +17,10 @@ python button.py
 
 ### Node/browser + usb gamepad
 
-(todo)
+Probably a good fallback if network is hard to set up on the pi. Using webGamepads because it seems more stable than other node libraries
 
-Probably a good fallback if network is hard to set up on the pi. Use webGamepads because it seems more stable than other node libraries
+```bash
+node web_backend
+
+# open localhost:8080 in chrome
+```
