@@ -21,8 +21,9 @@
 
       <h2 class="f2">We've put a button online, and want to see what you can make it do.</h2>
 
-      <div style="text-align:center">
-        <img src="off.svg" style="zoom:2"/>
+      <div class="tc">
+        <img src="on.png" class="mw5" id="button-overlay"/>
+        <img src="off.png" class="mw5"/>
       </div>
 
       <p class="f4">Show us something neat and we'll throw you a high-five<a href="#high-five-terms">*</a>.</p>
@@ -67,15 +68,15 @@ button.bind('press', function(data) {
     <script type="text/javascript">
 
       var h1 = document.querySelector('h1')
-      var img = document.querySelector('img')
+      var overlay = document.querySelector('#button-overlay')
 
       function press(){
-        img.src = 'on.svg'
+        overlay.className = 'mw5 show'
         h1.style.webkitFilter = h1.style.filter = 'blur(2px)'
       }
 
       function release(id){
-        img.src = 'off.svg'
+        overlay.className = 'mw5'
         h1.style.webkitFilter = h1.style.filter = ''
       }
 

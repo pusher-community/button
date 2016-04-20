@@ -44,3 +44,14 @@ a {
   border-top: 1px solid aquamarine;
   margin-top: 3em;
 }
+
+
+#button-overlay {
+  opacity: .001;
+  position: absolute;
+  transition: opacity .2s;
+}
+
+#button-overlay.show {
+  opacity: 1;
+}
