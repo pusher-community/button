@@ -22,10 +22,19 @@
       <h1 class="f-subheadline">button-{{buttonID}}</h1>
 
       <button>
-        <img src="/off.svg" id="img" />
+        <img src="/on.png" class="mw5" id="button-overlay"/>
+        <img src="/off.png" class="mw5"/>
       </button>
 
 
+      <h3>1. Grab the <a href="/">example code</a></h3>
+      {{#jsbinLink}}
+      <p class="mv4">
+        <a href="{{.}}" target="_blank" class="link bg-black pa2 white bn">Launch in JSBin</a>
+      </p>
+      {{/jsbinLink}}
+
+      <h3>2. Update to use your new button</h3>
       <pre class="bg-light-gray pa3"><code><strong class="rm">-</strong> const channel = pusher.subscribe('<strong class="rm">button</strong>')
 <strong>+</strong> const channel = pusher.subscribe('<strong>button-{{buttonID}}</strong>')</code></pre>
 
@@ -33,18 +42,27 @@
 
     <script type="text/javascript">
 
-      function post(extra, event){
-        event.preventDefault()
-        var request = new XMLHttpRequest()
-        request.open('POST', document.location.pathname + (extra||''), true)
-        request.send()
+      var overlay = document.getElementById('button-overlay')
+      var count = 0
 
-        // tmp
-        img.src = extra == '/press' ? '/on.svg' : '/off.svg'
+      function post(url){
+        var request = new XMLHttpRequest()
+        request.open('POST', url, true)
+        request.send()
       }
 
-      var press   = post.bind(null, '/press')
-      var release = post.bind(null, '/release')
+      var press = function(e){
+        e.preventDefault()
+        post(document.location.pathname + '/press/' + ++count)
+        overlay.className = 'mw5 show'
+      }
+
+      var release = function(e){
+        e.preventDefault()
+        post(document.location.pathname + '/release/' + count)
+        overlay.className = 'mw5'
+      }
+
 
       var button = document.querySelector('button')
 
