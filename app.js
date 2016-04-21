@@ -61,7 +61,7 @@ app.post('/b/:id/press/:count', hasKey, hasButton, (req, res) => {
   res.send('done')
 })
 
-app.post('/b/:id/release/:id', hasKey, hasButton, (req, res) => {
+app.post('/b/:id/release/:count', hasKey, hasButton, (req, res) => {
   if(req.button)
     pusher.trigger(`button-${req.button}`, 'release', {id: req.params.count, time: Date.now()})
 
