@@ -7,8 +7,10 @@ This is the source for the actual physical buttons.  There might be a few ways t
 Using the first button on a usb gamepad. Might be good for raspberry pi scripts.
 
 * [pygame](https://bitbucket.org/pygame/pygame/issues/82/homebrew-on-leopard-fails-to-install#comment-627494)
-* pip install -U python-dotenv
-* pip install pusher
+* `pip install -U python-dotenv`
+* `pip install pusher`
+* `brew tap homebrew/python`
+* `brew install pygame`
 
 ```bash
 python button.py

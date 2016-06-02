@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Button frontend</title>
+    <style media="screen">
+      body {font-family: sans-serif}
+    </style>
+  </head>
+  <body>
+    <h1>Gamepad</h1>
+    <ul id="logul"></ul>
+
+    <script type="text/javascript">
+
+
+    function print(htm){
+      var li = document.createElement('li')
+      li.innerHTML = `<small><em>${new Date().toISOString().substr(11,12)/* haha */}</em>: </small> ${htm}`
+      if (logul.firstChild) logul.insertBefore(li, logul.firstChild)
+      else logul.appendChild(li)
+      while (logul.childElementCount > 50) logul.lastChild.remove()
+    }
+
+
+    var active = []
+
+    window.addEventListener("gamepadconnected", function(e) {
+      print("Gamepad connected at index: " + gp.index)
+      active = [event.gamepad.index]
+    })
+
+
+    window.addEventListener("gamepaddisconnected", function(e) {
+      print("Gamepad disconnected from index:" + e.gamepad.index)
+      active = []
+    })
+
+
+    var cache = {}
+    function poll(){
+      requestAnimationFrame(poll)
+
+      active.forEach(function(index) {
+
+        var pressed = navigator.getGamepads()[index].buttons[0].pressed
+
+        if(pressed != cache[index]) {
+          cache[index] = pressed
+
+          var url = pressed ? '/press' : '/release'
+
+          print(url)
+
+          fetch(url, {
+            method:'POST'
+          })
+        }
+      })
+
+    }
+    poll()
+
+    </script>
+  </body>
+</html>
