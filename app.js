@@ -92,8 +92,7 @@ function hasButton(req, res, next) {
   var id = String(req.params.id).substr(0,10)
 
   redis.get(`button-key-${id}`)
-    .then( resp => {
-      if(resp === req.key)
+    .then( () => {
         req.button = id
     })
     .then(next)
