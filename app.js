@@ -77,7 +77,7 @@ app.use(bodyParser.json())
 
 app.get('/gamepad', (req, res) => res.render('gamepad'))
 
-app.post('/gamepad/press/:count', hasKey, hasButton, (req, res) => {
+app.post('/gamepad/press/:count', (req, res) => {
   if(req.body.password !== process.env.PASSWORD)
     return res.sendStatus(401)
 
@@ -85,7 +85,7 @@ app.post('/gamepad/press/:count', hasKey, hasButton, (req, res) => {
   res.send('done')
 })
 
-app.post('/gamepad/release/:count', hasKey, hasButton, (req, res) => {
+app.post('/gamepad/release/:count', (req, res) => {
   if(req.body.password !== process.env.PASSWORD)
     return res.sendStatus(401)
 
