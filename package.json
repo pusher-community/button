@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/pusher-community/button#readme",
   "dependencies": {
+    "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.1",
     "dotenv": "^2.0.0",
     "express": "^4.13.4",

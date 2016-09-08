@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Pusher Push Button</title>
+    <link rel="stylesheet" href="build.css" media="screen">
+  </head>
+  <body class="ph5 mw8 mb6">
+
+    <h3>
+      <a href="http://button.pusher.io">button.pusher.io</a>
+    </h3>
+
+    <hr />
+
+    <h1 class="f-subheadline">Gamepad input</h1>
+
+    <h2><label>Password <input type="password" id="password_input" /></label></h2>
+
+    <hr />
+
+    <main class="mw7">
+
+
+      <!-- <div class="tc">
+        <img src="on.png" class="mw5" id="button-overlay"/>
+        <img src="off.png" class="mw5"/>
+      </div> -->
+
+    </main>
+
+    <script type="text/javascript">
+      var password = localStorage.getItem('_password')
+      password_input.value = password || ''
+      password_input.addEventListener('change', function(){
+        localStorage.setItem('_password', password = this.value)
+      })
+
+
+
+      var active = []
+
+      window.addEventListener("gamepadconnected", function(e) {
+        console.log("Gamepad connected at index: " + event.gamepad.index)
+        active = [event.gamepad.index]
+      })
+
+
+      window.addEventListener("gamepaddisconnected", function(e) {
+        console.log("Gamepad disconnected from index:" + e.gamepad.index)
+        active = []
+      })
+
+      var initial = navigator.getGamepads()
+      if(initial[0]){
+        active = [0]
+      }
+
+
+      var press_count = 0
+      var cache = {}
+      function poll(){
+        requestAnimationFrame(poll)
+
+        active.forEach(function(index) {
+
+          var pressed = navigator.getGamepads()[index].buttons[0].pressed
+
+          if(pressed != cache[index]) {
+            cache[index] = pressed
+
+
+            if(pressed) {
+              press_count++
+            }
+
+            var url = '/gamepad/' + (pressed ? 'press' : 'release') + '/' + press_count
+
+            console.log(url)
+
+            fetch(url, {
+              method:'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({password:password})
+            })
+            .then(function(response){
+              if(response.status)
+              password_input.style.borderColor = response.status == 401 ? 'red' : 'inherit'
+
+            })
+          }
+        })
+
+      }
+      poll()
+
+
+
+    </script>
+
+  </body>
+</html>

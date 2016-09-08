@@ -5,6 +5,7 @@ const app = express()
 const cookieParser = require('cookie-parser')
 const crypto = require('crypto')
 const exphbs  = require('express-handlebars')
+const bodyParser = require('body-parser')
 
 const Redis = require('ioredis')
 const redis = new Redis(process.env.REDIS_URL)
@@ -67,6 +68,31 @@ app.post('/b/:id/release/:count', hasKey, hasButton, (req, res) => {
 
   res.send('done')
 })
+
+
+/* html gamepad driver */
+
+
+app.use(bodyParser.json())
+
+app.get('/gamepad', (req, res) => res.render('gamepad'))
+
+app.post('/gamepad/press/:count', hasKey, hasButton, (req, res) => {
+  if(req.body.password !== process.env.PASSWORD)
+    return res.sendStatus(401)
+
+  pusher.trigger('button', 'press', {id: req.params.count, time: Date.now()})
+  res.send('done')
+})
+
+app.post('/gamepad/release/:count', hasKey, hasButton, (req, res) => {
+  if(req.body.password !== process.env.PASSWORD)
+    return res.sendStatus(401)
+
+  pusher.trigger('button', 'release', {id: req.params.count, time: Date.now()})
+  res.send('done')
+})
+
 
 app.listen(process.env.PORT || 3000)
 
